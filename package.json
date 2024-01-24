@@ -1,8 +1,8 @@
 {
   "name": "jeux-web-clavier",
   "version": "1.0.0",
-  "description": "Jeux utilisant le clavier, recopiage de texte",
-  "main": "script.js",
+  "description": "",
+  "main": "script.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,21 +10,16 @@
     "type": "git",
     "url": "git+https://github.com/lunarsol/Jeux-Web-Clavier.git"
   },
-  "keywords": [
-    "keyboards",
-    "game",
-    "training",
-    "typing"
-  ],
-  "author": "Raphael VERDOIT",
+  "author": "VERDOIT Raphael",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lunarsol/Jeux-Web-Clavier/issues"
   },
   "homepage": "https://github.com/lunarsol/Jeux-Web-Clavier#readme",
-  "dependencies": {
-    "random-words": "^2.0.0"
+  "devDependencies": {
+    "@faker-js/faker": "^8.3.1"
   },
-  "type": "module",
-  "devDependencies": {}
+  "dependencies": {
+    "esm": "^3.2.25"
+  }
 }
