@@ -1,3 +1,5 @@
+import { generate } from "random-words";
+
 // Arrays containing words and phrases to rewrite
 const words = ["tekno", "music", "apple"];
 const phrases = ["Tekno is really cool", "I love life", "Music is poetic"];
