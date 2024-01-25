@@ -1,32 +1,10 @@
-async function readWordsFromFile(filePath) {
-    try {
-        const response = await fetch(filePath)
-        const content = await response.text()
-        return content.split('\n').filter(word => word.trim() !== '');
-    } catch (error) {
-        console.error('Erreur de lecture du fichier :', error.message);
-        return [];
-    }
-}
+import {getWords, generateRandomWord} from "./config.js";
 
-async function generateRandomWord(words) {
-    const randomIndex = Math.floor(Math.random() * words.length);
-    return words[randomIndex];
-}
-
-const filePath = './wordlist.txt';
+const words = await getWords()
 
 let mots
 let phrase
 let points = 0;
-let words
-
-try {
-    words = await readWordsFromFile(filePath);
-} catch (error) {
-    console.error('Erreur lors du chargement des mots depuis le fichier :', error.message);
-    words = [];  // En cas d'erreur, initialisez la liste à une valeur par défaut
-}
 
 function score() {
     return `Votre Score est de ${points} points`;
@@ -47,42 +25,43 @@ function limiteBoucleMax(scoreLimite) {
         // Vous pouvez ajouter une logique pour gérer une nouvelle tentative de saisie si nécessaire.
     }
 }
-function modeDeJeu(choix) {
-    while (choix !== 1 && choix !== 2) {
-        if (choix === 1) {
-            alert("Vous avez choisi le mode mot");
-        } else if (choix === 2) {
-            alert("Vous avez choisi le mode phrase");
-        } else {
-            alert("Le choix n'est pas bon");
-        }
+function modeDeJeu() {
+    if (document.getElementById("choixMot").value === "on"){
+        return "mot"
+    }else if (document.getElementById("choixPhrase").value === "on"){
+        return "phrase"
+    } else if (document.getElementById("choixPhrase").value !== "on" && document.getElementById("choixMot").value !== "on") {
+        alert("Vous devez choisir au moins une checkbox");
     }
 }
 
-let boucleStop = limiteBoucleMax(prompt("Voulez-vous une limite de score ? y/n"));
-let choixMode = prompt("Voulez-vous jouer avec des phrases (tapez 2) ou avec des mots (tapez 1)");
-choixMode = Number(choixMode);
-modeDeJeu(choixMode);
+let boucleStop = limiteBoucleMax(prompt("Voulez-vous une limite de round ? y/n"));
+let choixMode = modeDeJeu()
 
-if (Number(choixMode) === 1 || Number(choixMode) === 2) {
+if (choixMode === "mot" || choixMode === "phrase") {
     let toursEffectues = 0;
 
     while (toursEffectues < boucleStop) {
         let question, reponse;
 
-        if (Number(choixMode) === 1) {
+        if (choixMode === "mot") {
             mots = await generateRandomWord(words);
             question = `Le mot à réécrire est ${mots}`;
             reponse = prompt(question);
-        } else if (Number(choixMode) === 2) {
-            phrase = "UNAVAILABLE";
-            question = `La phrase à réécrire est UNAVAILABLE`;
+
+            if (reponse === mots) {
+                points += 1;
+            }
+        } else if (choixMode === "phrase") {
+            phrase = await generateRandomWord(words); // Générer une nouvelle phrase
+            question = `La phrase à réécrire est TEST`;
             reponse = prompt(question);
+
+            if (reponse === phrase) {
+                points += 1;
+            }
         }
 
-        if (reponse === (Number(choixMode) === 1 ? mots : phrase[points])) {
-            points += 1;
-        }
         toursEffectues += 1; // Incrémentation du nombre de tours effectués
         alert(`Votre score est de ${score()}`);
     }

@@ -3,10 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="app.js" type="module"></script>
+    <script src="app.js" type="module" defer></script>
 
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li>Menu</li>
+                <li>Recommencer</li>
+                <li></li>
+            </ul>
+        </nav>
+        <div id="point">
+            
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <form id="form">
+                <fieldset>
+                    <div class="round">
+                        <label for="boucleStop">Do you want a limit of round ?</label>
+                        <input type="checkbox" name="boucleStop" id="boucleStop">
+                        <label for="limite">Quel est votre limite</label>
+                        <input type="number" name="limite" id="limite">
+                    </div>
+                    <div class="gameMode">
+                        <label for="choixMot">Si vous voulez recopiez des mots</label>
+                        <input type="checkbox" name="choixMot" id="choixMot">
+                        <label for="choixPhrase">Si vous voulez recopiez des phrase :</label>
+                        <input type="checkbox" name="choixPhrase" id="choixPhrase">
+                    </div>
+                    <button type="submit">Suivant</button>
+                </fieldset>
+            </form>
+        </div>
+    </main>
+    <footer>
 
+    </footer>
 </body>
 </html>
