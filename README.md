@@ -1,3 +1,4 @@
 requirements :
 sudo apt install npm
-npm install --save random-words
+npm init
+npm install fs
